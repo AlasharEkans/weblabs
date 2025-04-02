@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чергування кольору div</title>
+    <style>
+        /* Стилі для div */
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: green; /* Початковий колір */
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Дано три елементи <font color="blue">< div ></font>. По першому натискання на кожен <font color="blue">< div ></font>, він фарбується 
+            червоним кольором, по другому натисканні фарбується в попередній колір і так далі кожен клік відбувається чергування фону. 
+            Рекомендовано зробити дві функції: одна фарбує в червоний колір, інша в зелений і вони змінююють одна одну 
+            <font color="blue">шляхом використання removeEventListener</font>.  
+        </p>
+    </font>
+    <!-- Три елементи div -->
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    
+
+    <script>
+        // Функція, яка фарбує div у червоний і змінює обробник
+        function paintRed(event) {
+            let div = event.target;
+            div.style.backgroundColor = "red"; // Змінюємо колір на червоний
+            div.removeEventListener("click", paintRed); // Видаляємо цей обробник
+            div.addEventListener("click", paintGreen); // Додаємо інший обробник
+        }
+
+        // Функція, яка фарбує div у зелений і змінює обробник
+        function paintGreen(event) {
+            let div = event.target;
+            div.style.backgroundColor = "green"; // Змінюємо колір на зелений
+            div.removeEventListener("click", paintGreen); // Видаляємо цей обробник
+            div.addEventListener("click", paintRed); // Додаємо інший обробник
+        }
+
+        // Отримуємо всі div та додаємо початковий обробник
+        document.querySelectorAll(".box").forEach(div => {
+            div.addEventListener("click", paintRed);
+        });
+    </script>
+
+</body>
+</html>

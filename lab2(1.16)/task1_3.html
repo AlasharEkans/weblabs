@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1.3</title>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Дано три  елементи форми <font color="blue">input</font>. Прив'яжіть всім <font color="blue">input</font> такий обробник: 
+            по кліку кожен <font color="blur">input</font> виводить своє значення (<font color="blue">value</font>) 
+            в абзац з <font color="blue">id = “demo“</font>
+        </p>
+        
+        <!-- Поля введення -->
+        <input type="text" value="Дивовижний краєвид"><br>
+        <input type="text" value="Волошкове поле"><br>
+        <input type="text" value="Зелений гай"><br>
+
+        <!-- Абзац, куди буде виводитися значення -->
+        <p id="demo">Тут з’явиться текст...</p>
+    </font>
+
+    <script>
+        // Отримуємо всі елементи input на сторінці
+        document.querySelectorAll("input").forEach(input => {
+            // Додаємо обробник події "click" для кожного input
+            input.addEventListener("click", function() {
+                // Отримуємо абзац з id "demo" і змінюємо його текст на значення input
+                document.getElementById("demo").textContent = this.value;
+            });
+        });
+    </script>
+</body>
+</html>

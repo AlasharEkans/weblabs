@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обробка подій для параграфів</title>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Дано три параграфи з числами записаними словами. При натисканні на параграф в ньому 
+            повинен з'явиться квадрат числа, яке він містить.
+        </p>
+        
+        <!-- Три параграфи з числами записаними словами -->
+        <p class="num">три</p>
+        <p class="num">п’ять</p>
+        <p class="num">сім</p>
+    </font>
+    <script>
+        // Об'єкт для перетворення чисел у слова
+        const numbers = {
+            "один": 1,
+            "два": 2,
+            "три": 3,
+            "чотири": 4,
+            "п’ять": 5,
+            "шість": 6,
+            "сім": 7,
+            "вісім": 8,
+            "дев’ять": 9,
+            "десять": 10
+        };
+
+        // Отримуємо всі параграфи з класом num
+        document.querySelectorAll(".num").forEach(paragraph => {
+            // Додаємо обробник події click
+            paragraph.addEventListener("click", function() {
+                let text = this.textContent.toLowerCase(); // Отримуємо текст параграфа у нижньому регістрі
+                let number = numbers[text]; // Перетворюємо слово в число
+
+                if (number !== undefined) {
+                    this.textContent = number ** 2; // Записуємо квадрат числа в параграф
+                }
+            });
+        });
+    </script>
+</body>
+</html>

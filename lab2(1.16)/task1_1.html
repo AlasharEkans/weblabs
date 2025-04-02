@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1.1</title>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Дано три рисунки <font color="blue">300*300</font> пікселів. З використанням властивості 
+            <font color="blue">elem.onclick</font> прив'яжіть до кожного рисунку обробник події, 
+            щоб при натисканні на картинку <font color="blue">console.log</font> виводив значення її атрибуту width. 
+        </p>
+    </font>
+
+    <!-- Три зображення, кожне розміром 300x300 пікселів -->
+    <img src="image/img1_1.jpeg" width="300" height="300" alt="Зображення 1">
+    <img src="image/img1_2.jpg" width="300" height="300" alt="Зображення 2">
+    <img src="image/img1_3.jpg" width="300" height="300" alt="Зображення 3">
+
+    <script>
+        // Отримуємо всі зображення на сторінці
+        document.querySelectorAll("img").forEach(img => {
+            // Додаємо обробник події для кожного зображення
+            img.onclick = function() {
+                console.log(this.width); // Виводимо значення width у консоль
+            };
+        });
+    </script>
+</body>
+</html>

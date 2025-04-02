@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обробка подій для input</title>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Для всіх <font color="blue">input</font> зробіть так, щоб вони виводили значення <font color="blue">value</font> з використанням 
+            функції <font color="blue">console.log</font>, при натисканні на будь-який з них, але тільки за першим натисканням. 
+            Повторне натискання на <font color="blue">input</font> повинно  виводити його вміст в alert.
+        </p>
+        
+        <!-- Поля введення -->
+        <input type="text" value="Дивовижний краєвид"><br>
+        <input type="text" value="Волошкове поле"><br>
+        <input type="text" value="Зелений гай"><br>
+    </font>
+
+    <script>
+        // Отримуємо всі input
+        document.querySelectorAll("input").forEach(input => {
+            let firstClick = true; // Змінна для перевірки першого кліку
+
+            input.addEventListener("click", function() {
+                if (firstClick) {
+                    console.log(this.value); // Виводимо значення в консоль при першому кліку
+                    firstClick = false; // Змінюємо стан, щоб наступні кліки працювали по-іншому
+                } else {
+                    alert(this.value); // Виводимо значення в alert при наступних кліках
+                }
+            });
+        });
+    </script>
+</body>
+</html>

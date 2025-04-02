@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1.2</title>
+</head>
+<body>
+    <h2><b>Завдання:</b></h2>
+    <font size="4">
+        <p>
+            Дано  три посилання. З використанням методу <font color="blue">addEventListener, removeEventListener</font> прив'яжіть 
+            до кожного посилання обробник події, щоб при наведенні на посилання 
+            в атрибут <font color="blue">title</font> записувався значення атрибуту href.
+        </p>
+        
+        <!-- Три посилання, до яких буде прив’язано обробник подій -->
+        <a href="https://www.figma.com/" class="link">Figma</a><br>
+        <a href="https://ubuntu.com/" class="link">Ubuntu</a><br>
+        <a href="https://github.com" class="link">GitHub</a><br>
+    </font>
+
+    <script>
+        // Функція, яка додає значення href у title при наведенні мишкою
+        function addTitle(event) {
+            event.target.title = event.target.href;
+        }
+
+        // Функція, яка видаляє атрибут title при відведенні мишки
+        function removeTitle(event) {
+            event.target.removeAttribute("title");
+        }
+
+        // Отримуємо всі посилання з класом .link
+        document.querySelectorAll(".link").forEach(link => {
+            // Додаємо обробник події "mouseover" (наведення мишки)
+            link.addEventListener("mouseover", addTitle);
+            // Додаємо обробник події "mouseout" (відведення мишки)
+            link.addEventListener("mouseout", removeTitle);
+        });
+    </script>
+</body>
+</html>
