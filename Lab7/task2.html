@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<script>
+// Функція для виведення повідомлення в консоль з поточною датою та часом
+function logAttempt(attemptNumber, guess, correctNumber) {
+    const now = new Date();
+    const dateString = now.toLocaleString(); // Отримуємо поточну дату і час
+    console.log(`${dateString} Спроба ${attemptNumber}: число ${guess} – не вірно`);
+}
+
+// визначення різниці між поточним і реальним
+function getHint(guess, correctNumber) 
+{
+    const difference = Math.abs(guess - correctNumber);
+    
+    if (difference == 0) {
+        return ''; // якщо правильно, не виводити підказку
+    }
+    
+    if (difference <= 5) {
+        return "гаряче";
+    } else if (difference <= 10) {
+        return "тепло";
+    } else {
+        return "холодно";
+    }
+}
+
+// головна функція
+function playGame() {
+    const correctNumber = Math.floor(Math.random() * 51); // генерація рандомного числа від 0 до 50
+    let attempts = 0; // лічильник
+    let guess = -1;
+    let hint = '';
+
+    while (guess !== correctNumber) 
+    {
+        attempts++;
+
+        // віконце запиту
+        guess = parseInt(prompt(`Спроба ${attempts}. Вгадай число від 0 до 50:`));
+
+        if (isNaN(guess) || guess < -1 || guess > 50) {
+            alert("Будь ласка, введіть число в діапазоні від 0 до 50.");
+            continue;
+        }
+
+        // звернення до функції різниці
+        hint = getHint(guess, correctNumber);
+
+        // логування
+        logAttempt(attempts, guess, correctNumber);
+        
+        if (guess === -1) // для дебагу додав
+        {
+            alert("Ви вийшли з гри.");
+            break 
+        }
+        // якщо вгадав
+        if (guess === correctNumber) 
+        {
+            alert(`За ${attempts} спроб ви вгадали число ${correctNumber}`);
+        }
+        else // якщо лотерейний білет краще не купляти
+        {
+            alert(`Число невірне. Ви ${hint}. Спробуйте ще раз.`);
+        }
+
+    }
+
+    // пропозиція зіграти ще раз
+    const playAgain = confirm("Хочете спробувати ще раз?");
+    if (playAgain) {
+        playGame();
+    }
+}
+
+// запуск головної функції
+playGame();
+</script>
+
+</body>
+</html>

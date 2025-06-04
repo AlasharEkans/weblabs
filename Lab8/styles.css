@@ -1,0 +1,151 @@
+body 
+{
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #eef2f3;
+    margin: 0;
+    text-align: center;
+}
+
+.container 
+{
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.start-page h1 
+{
+    color: #333;
+    margin-bottom: 35px;
+}
+
+#startGameBtn, #restartGameBtn 
+{
+    padding: 12px 25px;
+    font-size: 1em; 
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#startGameBtn:hover, #restartGameBtn:hover 
+{
+    background-color: #0056b3;
+}
+
+/* стилі для гри */
+.game-page 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#timerDisplay 
+{
+    font-size: 1.5em;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.game-board 
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    width: 380px;
+    margin-bottom: 25px;
+    border: 2px solid #b0bec5;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.number-cell 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.number-cell:hover 
+{
+    background-color: #e9ecef;
+}
+
+.number-cell.clicked-correctly 
+{
+    background-color: #a7f3d0;
+    color: #047857 !important;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+
+.stats-section 
+{
+    margin-top: 30px;
+    width: 90%;
+    max-width: 450px;
+}
+
+.stats-section h2 
+{
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#statsTable 
+{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#statsTable th, #statsTable td 
+{
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+}
+
+#statsTable th 
+{
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+#statsTable tr:nth-child(even) 
+{
+    background-color: #f8f9fa;
+}
+
+#statsTable tr.best-result 
+{
+    background-color: #fff3cd;
+    color: #856404;
+    font-weight: bold;
+}
+
+#statsTable td:last-child, #statsTable th:last-child 
+{
+    text-align: right;
+}

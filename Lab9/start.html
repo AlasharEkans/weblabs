@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Знайди Картинку - Початок</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container start-page">
+        <h1>Гра "Знайди Картинку"</h1>
+        <button id="startGameBtn">Почати гру</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // перехід на сторінку гри
+            $('#startGameBtn').on('click', function() {
+                window.location.href = 'game.html';
+            });
+        });
+    </script>
+</body>
+</html>

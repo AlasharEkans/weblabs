@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day of the Week</title>
+</head>
+<body>
+    <script>
+        // зберіганя всього
+        const languages = 
+        {
+            ua: 
+            {
+                question: "Виберіть мову (ua або en):",
+                dayQuestion: "Введіть номер дня неділі від 1 до 7?",
+                days: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
+            },
+            en: 
+            {
+                question: "Choose the language (ua or en):", //забув реалізувати
+                dayQuestion: "Enter the day number of the week (from 1 to 7):",
+                days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            }
+        };
+
+        // мова
+        function askLanguage() 
+        {
+            let language;
+            do 
+            {
+                language = prompt(languages.ua.question).trim().toLowerCase();
+                if (language !== 'ua' && language !== 'en') {
+                    alert('Неправильний ввід. Виберіть "ua" або "en".');
+                }
+            } while (language !== 'ua' && language !== 'en');
+            return language;
+        }
+
+        // день тижня
+        function askDay(language) 
+        {
+            let dayNumber;
+            do {
+                dayNumber = parseInt(prompt(languages[language].dayQuestion), 10);
+                if (isNaN(dayNumber) || dayNumber < 1 || dayNumber > 7) {
+                    alert('Неправильний ввід. Введіть число від 1 до 7.');
+                }
+            } while (isNaN(dayNumber) || dayNumber < 1 || dayNumber > 7);
+            return dayNumber;
+        }
+
+        // логіка
+        function main() 
+        {
+            const language = askLanguage();
+            const dayNumber = askDay(language);
+            const day = languages[language].days[dayNumber - 1];
+            alert(`Вибраний день: ${day}`);
+        }
+
+        // виклик при завантаженні
+        main();
+    </script>
+</body>
+</html>

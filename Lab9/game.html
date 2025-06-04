@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Знайди Картинку - Гра</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container game-page">
+        <div id="categorySelection">
+            <h2>Виберіть категорію:</h2>
+            <button class="category-btn" data-category="landscape">Тварини</button>
+            <button class="category-btn" data-category="insects">Комахи</button>
+            <button class="category-btn" data-category="fish">Риби</button>
+        </div>
+
+        <div id="gameArea" style="display:none;">
+            <div id="currentImageContainer">
+                <p>Знайди та перетягни цю картинку:</p>
+                <div id="currentImageDraggableWrapper">
+
+                </div>
+            </div>
+
+            <div id="gameBoard">
+
+            </div>
+            <button id="restartGameBtn">Почати з початку / Змінити категорію</button>
+        </div>
+
+        <div id="winDialog" title="Перемога!" style="display:none;">
+            <p>Вітаємо! Ви знайшли всі картинки!</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

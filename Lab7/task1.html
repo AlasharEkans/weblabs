@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поточний час</title>
+</head>
+<body>
+    <button onclick="showTime()">Показати поточний час</button>
+
+    <script>
+        function showTime() {
+            const now = new Date(); // створено Date, який містить поточний час та дату
+
+            // словник
+            const months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+            const weekdays = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"];
+
+            // отримання годин, хвилин, секунд та інших необхідних даних
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const day = now.getDate();
+            const month = months[now.getMonth()]; // повертає місяць, бере його номер індекс і за індексом назву з словника
+            const year = now.getFullYear(); //повний рік, наприклад - 2025
+            const weekday = weekdays[now.getDay()]; // аналогічно до місяця, неділя це 0
+
+            // рядок з поточним часом у заданому форматі
+            const currentTime = `${hours}:${minutes}:${seconds}, ${weekday}, ${day} ${month} ${year} року`;
+
+            console.log(currentTime);
+        }
+    </script>
+</body>
+</html>

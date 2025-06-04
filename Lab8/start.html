@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя перша гра</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container start-page">
+        <h1>Клікни Цифри по Порядку</h1>
+        <button id="startGameBtn">Почати гру</button>
+    </div>
+    <script>
+        // перехід на сторінку гри
+        document.getElementById('startGameBtn').addEventListener('click', function() {
+            window.location.href = 'game.html';
+        });
+    </script>
+</body>
+</html>

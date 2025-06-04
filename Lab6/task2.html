@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестування електричної мережі</title>
+</head>
+<body>
+    <h1>Тестування електричної мережі</h1>
+    <button onclick="testElectricGrid()">Запустити тест</button>
+
+    <script>
+        // генерація випадкового числа з межами
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // клас для електричних станцій
+        class PowerStation {
+            constructor(name) {
+                this.name = name;
+                this.power = getRandomInt(1, 100); // рандом потужност станцій 1-5 МВт
+            }
+
+            getPower() {
+                return this.power;
+            }
+        }
+
+        // клас для сонячних панелей
+        class SolarPanel {
+            constructor() {
+                this.powerDay = getRandomInt(1, 5); // рандом потужност панелей 1-5 МВт
+            }
+
+            getPower(isDaytime) {
+                return isDaytime ? this.powerDay : 0;
+            }
+        }
+
+        // клас для житлових будинків
+        class ResidentialBuilding {
+            constructor() {
+                this.numApartments = getRandomInt(1, 400); // рандом квартир 1-400
+            }
+
+            getPower(isDaytime) {
+                const powerPerApartment = isDaytime ? 4 : 1; // кВт на квартиру
+                return this.numApartments * powerPerApartment; // всі квартири
+            }
+        }
+
+        // клас для ліній електропередач
+        class PowerLine {
+            constructor() {
+                this.power = getRandomInt(10, 100); // рандом потужність 10-100МВт
+                this.pricePerMWh = getRandomInt(100, 1000); // рандом ціна/МВт 100-1000 грн
+            }
+
+            transferPower(amount, isExport) {
+                const totalCost = amount * this.pricePerMWh;
+                return {
+                    amount: isExport ? -amount : amount,
+                    cost: isExport ? -totalCost : totalCost
+                };
+            }
+        }
+
+        // тест
+        function testElectricGrid() {
+            // створення елементів мережі, з випадковими значеннями
+            const powerStations = [
+                new PowerStation('Station1'),
+                new PowerStation('Station2')
+            ];
+
+            const solarPanels = [
+                new SolarPanel(),
+                new SolarPanel()
+            ];
+
+            const residentialBuildings = [
+                new ResidentialBuilding(),
+                new ResidentialBuilding()
+            ];
+
+            const powerLines = [
+                new PowerLine(),
+                new PowerLine()
+            ];
+
+            // баланс вдень
+            let totalGeneratedPowerDay = 0;
+            let totalConsumedPowerDay = 0;
+            let totalImportedPowerDay = 0;
+            let totalExportedPowerDay = 0;
+            let totalCostDay = 0;
+
+            powerStations.forEach(station => totalGeneratedPowerDay += station.getPower());
+            solarPanels.forEach(panel => totalGeneratedPowerDay += panel.getPower(true));
+            residentialBuildings.forEach(building => totalConsumedPowerDay += building.getPower(true));
+
+            // логіка імпорту/експорту вдень
+            powerLines.forEach(line => {
+                const availablePower = Math.min(totalGeneratedPowerDay - totalConsumedPowerDay, line.power);
+                const powerTransfer = line.transferPower(availablePower, totalGeneratedPowerDay < totalConsumedPowerDay);
+                totalExportedPowerDay += powerTransfer.amount < 0 ? -powerTransfer.amount : 0;
+                totalImportedPowerDay += powerTransfer.amount > 0 ? powerTransfer.amount : 0;
+                totalCostDay += powerTransfer.cost;
+            });
+
+            // консоль для дня
+            console.log('Баланс вдень:');
+            console.log(`Згенеровано: ${totalGeneratedPowerDay} МВт`);
+            console.log(`Спожито: ${totalConsumedPowerDay} кВт`);
+            console.log(`Експортовано: ${totalExportedPowerDay} МВт`);
+            console.log(`Імпортовано: ${totalImportedPowerDay} МВт`);
+            console.log(`Вартість: ${totalCostDay} грн`);
+
+            // баланс вночі
+            let totalGeneratedPowerNight = 0;
+            let totalConsumedPowerNight = 0;
+            let totalImportedPowerNight = 0;
+            let totalExportedPowerNight = 0;
+            let totalCostNight = 0;
+
+            solarPanels.forEach(panel => totalGeneratedPowerNight += panel.getPower(false));
+            residentialBuildings.forEach(building => totalConsumedPowerNight += building.getPower(false));
+
+            // логіка імпорту/експорту вночі
+            powerLines.forEach(line => {
+                const availablePower = Math.min(totalGeneratedPowerNight - totalConsumedPowerNight, line.power);
+                const powerTransfer = line.transferPower(availablePower, totalGeneratedPowerNight < totalConsumedPowerNight);
+                totalExportedPowerNight += powerTransfer.amount < 0 ? -powerTransfer.amount : 0;
+                totalImportedPowerNight += powerTransfer.amount > 0 ? powerTransfer.amount : 0;
+                totalCostNight += powerTransfer.cost;
+            });
+
+            // консоль для ночі
+            console.log('Баланс вночі:');
+            console.log(`Згенеровано: ${totalGeneratedPowerNight} МВт`);
+            console.log(`Спожито: ${totalConsumedPowerNight} кВт`);
+            console.log(`Експортовано: ${totalExportedPowerNight} МВт`);
+            console.log(`Імпортовано: ${totalImportedPowerNight} МВт`);
+            console.log(`Вартість: ${totalCostNight} грн`);
+        }
+    </script>
+</body>
+</html>

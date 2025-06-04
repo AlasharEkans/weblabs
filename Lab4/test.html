@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<h1>Тести </h1>
+<button onclick="runTests()">Запустити</button>
+
+<script>
+
+// 1. seconds
+function seconds(total) {
+    return total % 60;
+}
+
+// 2. perimeter
+function perimeter(side, count) {
+    return side * count;
+}
+
+// 3. fizzBuzz
+function fizzBuzz(n) {
+    let output = "";
+    for (let i = 1; i <= n; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+            output += "fizzbuzz\n";
+        } else if (i % 3 === 0) {
+            output += "fizz\n";
+        } else if (i % 5 === 0) {
+            output += "buzz\n";
+        } else {
+            output += i + "\n";
+        }
+    }
+    alert(output);
+}
+
+// 4. Calculate
+function Calculate(a, b, c) {
+    alert((a + b + c) / 3);
+}
+
+// 5. isDivisible
+function isDivisible(n, x, y) {
+    return n % x === 0 && n % y === 0;
+}
+
+// 6. Масив аналіз
+function analyzeArray(arr) {
+    let max = Math.max(...arr);
+    let min = Math.min(...arr);
+    let sum = arr.reduce((acc, val) => acc + val, 0);
+    let average = sum / arr.length;
+    let oddNumbers = arr.filter(num => num % 2 !== 0);
+    
+    alert(`Максимум: ${max}\nМінімум: ${min}\nСума: ${sum}\nСереднє: ${average}\nНепарні: ${oddNumbers.join(', ')}`);
+}
+
+// 7. Двовимірний масив
+function modifyMatrix(matrix) {
+    for (let i = 0; i < matrix.length; i++) {
+        if (matrix[i][i] < 0) {
+            matrix[i][i] = 0;
+        } else {
+            matrix[i][i] = 1;
+        }
+    }
+    alert('Змінений масив:\n' + matrix.map(row => row.join(' ')).join('\n'));
+}
+
+// 8. Add, Sub, Mul, Div
+function Add(a, b) {
+    alert('Сума: ' + (a + b));
+}
+function Sub(a, b) {
+    alert('Різниця: ' + (a - b));
+}
+function Mul(a, b) {
+    alert('Добуток: ' + (a * b));
+}
+function Div(a, b) {
+    if (b === 0) {
+        alert('Ділення на нуль неможливе');
+    } else {
+        alert('Частка: ' + (a / b));
+    }
+}
+
+// 9 checkNumber
+function checkNumber(num) {
+    alert((num > 0 ? 'Позитивне' : 'Негативне'));
+    
+    let isPrime = true;
+    if (num <= 1) isPrime = false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            isPrime = false;
+            break;
+        }
+    }
+    alert(isPrime ? 'Просте число' : 'Не просте число');
+
+    [2, 3, 5, 6, 9].forEach(divisor => {
+        alert(`Число ${num} ${num % divisor === 0 ? '' : 'не '}ділиться на ${divisor}`);
+    });
+}
+
+// 10. Перевернутий масив + квадрат
+function reverseSquare(arr) {
+    return arr.reverse().map(el => 
+        typeof el === 'number' ? el * el : el
+    );
+}
+
+// 11. Видалення дублікатів
+function removeDupl(arr) {
+    return [...new Set(arr)];
+}
+
+// === Функція для тестування ===
+function runTests() {
+    let choice = prompt(
+        "Виберіть тест:\n" +
+        "1. seconds\n" +
+        "2. perimeter\n" +
+        "3. fizzBuzz\n" +
+        "4. Calculate\n" +
+        "5. isDivisible\n" +
+        "6. analyzeArray\n" +
+        "7. modifyMatrix\n" +
+        "8. Add/Sub/Mul/Div\n" +
+        "9. checkNumber\n" +
+        "10. reverseSquare\n" +
+        "11. removeDupl"
+    );
+    
+    switch (choice) {
+        case '1':
+            let total = Number(prompt('Введіть total секунд:'));
+            alert('Залишок: ' + seconds(total));
+            break;
+        case '2':
+            let side = Number(prompt('Введіть довжину сторони:'));
+            let count = Number(prompt('Введіть кількість сторін:'));
+            alert('Периметр: ' + perimeter(side, count));
+            break;
+        case '3':
+            let n = Number(prompt('До якого числа вивести FizzBuzz?'));
+            fizzBuzz(n);
+            break;
+        case '4':
+            let a = Number(prompt('Введіть перше число:'));
+            let b = Number(prompt('Введіть друге число:'));
+            let c = Number(prompt('Введіть третє число:'));
+            Calculate(a, b, c);
+            break;
+        case '5':
+            let num = Number(prompt('Введіть число:'));
+            let x = Number(prompt('Введіть дільник x:'));
+            let y = Number(prompt('Введіть дільник y:'));
+            alert(isDivisible(num, x, y));
+            break;
+        case '6':
+            let arrayInput = prompt('Введіть числа через кому:');
+            let arr = arrayInput.split(',').map(Number);
+            analyzeArray(arr);
+            break;
+        case '7':
+            let matrix = [];
+            for (let i = 0; i < 5; i++) {
+                let row = prompt(`Введіть 5 чисел рядка ${i+1}, через кому:`)
+                    .split(',')
+                    .map(Number);
+                matrix.push(row);
+            }
+            modifyMatrix(matrix);
+            break;
+        case '8':
+            let num1 = Number(prompt('Введіть перше число:'));
+            let num2 = Number(prompt('Введіть друге число:'));
+            let operation = prompt('Оберіть операцію: add, sub, mul, div');
+            if (operation === 'add') Add(num1, num2);
+            else if (operation === 'sub') Sub(num1, num2);
+            else if (operation === 'mul') Mul(num1, num2);
+            else if (operation === 'div') Div(num1, num2);
+            else alert('Невідома операція');
+            break;
+        case '9':
+            let number = Number(prompt('Введіть число:'));
+            checkNumber(number);
+            break;
+        case '10':
+            let reverseInput = prompt('Введіть масив через кому:');
+            let reverseArr = reverseInput.split(',').map(el => {
+                return isNaN(el) ? el : Number(el);
+            });
+            alert('Результат: ' + reverseAndSquare(reverseArr).join(', '));
+            break;
+        case '11':
+            let dupInput = prompt('Введіть масив через кому:');
+            let dupArr = dupInput.split(',').map(Number);
+            alert('Без дублікатів: ' + removeDuplicates(dupArr).join(', '));
+            break;
+        default:
+            alert('Невірний вибір');
+    }
+}
+</script>
+
+</body>
+</html>
